@@ -8,10 +8,8 @@ import io
 import base64
 from PIL import Image
 import pdf2image
-# import google.generativeai as genai
 from google import genai
 
-# Initialize the client once (reuse this for all requests)
 client = genai.Client(
     api_key=os.getenv("GOOGLE_API_KEY")
 )
@@ -28,27 +26,6 @@ def get_gemini_response(input_prompt, pdf_content, additional_prompt):
         contents=combined_prompt
     )
     return response.text
-
-
-# def input_pdf_setup(uploaded_file):
-#     if uploaded_file is not None:
-#         images = pdf2image.convert_from_bytes(uploaded_file.read())
-
-#         first_page = images[0]
-
-#         img_byte_arr = io.BytesIO()
-#         first_page.save(img_byte_arr, format="JPEG")
-#         img_byte_arr = img_byte_arr.getvalue()
-
-#         pdf_parts = [
-#             {
-#                 "mime_type" : "image/jpeg",
-#                 "data" : base64.b64encode(img_byte_arr).decode()
-#             }
-#         ]
-#         return pdf_parts
-#     else:
-#         raise FileNotFoundError("No file Uploaded")
 
 def input_pdf_setup(uploaded_file):
     if uploaded_file is not None:
